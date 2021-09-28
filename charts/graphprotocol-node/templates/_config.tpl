@@ -23,6 +23,22 @@
   provider = [
   { label = "mainnet1", url = "https://api.avax.network/ext/bc/C/rpc"}
   ]
+  [chains.{{ $name }}]
+    shard = "primary"
+    {{- range $conf.providers }}
+    [[chains.{{ $name }}.provider]]
+      label = {{ .label | quote }}
+      url = {{ .url | quote }}
+      features = {{ toJson .features }}
+      transport = {{ default "rpc" .transport | quote }}
+      {{- with .headers }}
+      [headers]
+        {{- range $k, $v := . }}
+        {{ $k }} = {{ $v | quote }}
+        {{- end }}
+      {{- end}}
+    {{- end }}
+  {{- end }}
 
 [deployment]
 [[deployment.rule]]
