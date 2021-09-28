@@ -17,12 +17,13 @@
 
 [chains]
   ingestor = "{{ .Values.blockIngestorNodeId }}"
-  {{- range $name, $conf := .Values.config.chains }}
   [chains.mainnet]
   shard = "primary"
   provider = [
   { label = "mainnet1", url = "https://api.avax.network/ext/bc/C/rpc"}
   ]
+  {{- range $name, $conf := .Values.config.chains }}
+
   [chains.{{ $name }}]
     shard = "primary"
     {{- range $conf.providers }}
