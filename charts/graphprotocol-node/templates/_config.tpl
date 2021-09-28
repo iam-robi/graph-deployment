@@ -22,6 +22,7 @@
   provider = [
   { label = "mainnet1", url = "https://api.avax.network/ext/bc/C/rpc"}
   ]
+  features = []
   {{- range $name, $conf := .Values.config.chains }}
 
   [chains.{{ $name }}]
