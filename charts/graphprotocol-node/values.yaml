@@ -120,3 +120,15 @@ ingressAdmin:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+ingressIpfs:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    # - host: chart-example.local
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local 
