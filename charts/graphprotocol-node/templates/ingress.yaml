@@ -102,4 +102,38 @@ spec:
               servicePort: graphql-ws
     {{- end }}
 {{- end }}
-
+---
+{{- if .Values.ingressIpfs.enabled -}}
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: {{ include "ipfs.fullname" . }}-ipfs
+  labels:
+    {{- include "ipfs.labels" . | nindent 4 }}
+  {{- with .Values.ingressIpfs.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if .Values.ingressIpfs.tls }}
+  tls:
+    {{- range .Values.ingressIpfs.tls }}
+    - hosts:
+        {{- range .hosts }}
+        - {{ . | quote }}
+        {{- end }}
+      secretName: {{ .secretName }}
+    {{- end }}
+  {{- end }}
+  rules:
+    {{- range .Values.ingressIpfs.hosts }}
+    - host: {{ . | quote }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              serviceName: {{ include "ipfs.fullname" $ }}
+              servicePort: 5001
+    {{- end }}
+{{- end }}
