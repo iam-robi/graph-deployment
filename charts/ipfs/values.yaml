@@ -19,16 +19,15 @@ profile: server
 
 ingressApi:
   enabled: false
-    # hosts:
-    # - ipfs-api.localhost.localdomain
-    # - localhost.localdomain/ipfs-api
-    # annotations:
-    #   kubernetes.io/ingress.class: nginx
-    #   kubernetes.io/tls-acme: "true"
-    # tls:
-    # - secretName: chart-example-tls
-    #   hosts:
-    #     - chart-example.local
+    hosts:
+    - ipfs.pango.elasticboard.io
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      kubernetes.io/tls-acme: "true"
+    tls:
+    - secretName: ipfs-tls
+      hosts:
+        - ipfs.pango.elasticboard.io
 
 ingressGateway:
   enabled: false

@@ -37,7 +37,7 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: {{ include "graphprotocol-node.fullname" . }}-admin
+  name: {{ include "graphprotocol-node.fullname" . }}-ws
   labels:
     {{- include "graphprotocol-node.labels" . | nindent 4 }}
   {{- with .Values.ingressAdmin.annotations }}
