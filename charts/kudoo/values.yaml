@@ -30,3 +30,6 @@ service:
   name: Node
   type: NodePort
   servicePort: 3000
+
+ingress:
+  enabled: false
