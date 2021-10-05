@@ -1,0 +1,58 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+revisionHistoryLimit: 1
+fullnameOverride: ""
+image:
+  repository: iam0robi/kudoo-api
+  tag: 73cdb6e
+  pullPolicy: IfNotPresent
+  resources:
+    requests:
+      cpu: 200m
+      memory: 300Mi
+#  readinessProbe: {}
+  # Example (replace readinessProbe: {} with the following):
+  readinessProbe:
+    httpGet:
+      path: /ready
+      port: 3000
+    initialDelaySeconds: 3
+    periodSeconds: 5
+#  livenessProbe: {}
+#  # Example (replace livenessProbe: {} with the following)::
+  livenessProbe:
+    httpGet:
+      path: /live
+      port: 3000
+    initialDelaySeconds: 40
+    periodSeconds: 10
+service:
+  name: Node
+  type: NodePort
+  servicePort: 3000
+
+postgres:
+  db: ""
+  host: ""
+  replicaHost: ""
+  user: ""
+  password:
+    value: ""
+#    fromSecret:
+#      name:
+#      key:
+
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    -
+      kudoo.api.pango.elasticboard.io
+  tls:
+    -
+      hosts:
+        - kudoo.api.pango.elasticboard.io
+      secretName: kudoo-api-tls

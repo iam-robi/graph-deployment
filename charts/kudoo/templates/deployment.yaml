@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "kudoo-api.fullname" . }}
+  labels:
+    {{- include "kudoo-api.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      {{- include "kudoo-api.selectorLabels" . | nindent 6 }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  template:
+    metadata:
+      labels:
+        {{- include "kudoo-api.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: "{{  .Chart.Name  }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.servicePort}}
+          resources:
+            requests:
+              cpu: "{{ .Values.image.resources.requests.cpu }}"
+              memory: "{{ .Values.image.resources.requests.memory }}"
+          env:
+            - name: TYPEORM_PASSWORD
+              value:  "{{ .Values.postgres.password.value }}"
+            - name: TYPEORM_DATABASE
+              value : "{{ .Values.postgres.db }}"
+            - name: TYPEORM_HOST
+              value : "{{ .Values.postgres.host }}"
+            - name: TYPEORM_USERNAME
+              value : "{{ .Values.postgres.user }}"
+            - name: PG_PORT
+              value : "{{ .Values.postgres.port }}"
+            - name: SERVER_PORT
+              value : "{{ .Values.service.servicePort }}"

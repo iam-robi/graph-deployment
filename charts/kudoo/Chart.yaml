@@ -1,0 +1,13 @@
+apiVersion: v2
+description: A Helm chart for Kubernetes to deploy kudoo api
+name: kudoo-api
+keywords:
+  - kudoo
+  - avalanche
+  - graphql
+version: 1.0.0
+maintainers:
+  # TODO: Change maintainers list
+  - email: robi-and-bori@protonmail.com
+    name: robi
+appVersion: v0.1.1
