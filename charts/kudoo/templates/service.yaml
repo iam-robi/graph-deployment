@@ -1,15 +1,17 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    prometheus.io/scrape: 'true'
-  name: "{{  .Chart.Name }}-service"
+  name: {{ include "kudoo-api.fullname" . }}
   labels:
-    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    {{- include "kudoo-api.labels" . | nindent 4 }}
+  {{- with .Values.service.annotations }}
+  annotations:
+  {{-   toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.service.type }}
   ports:
     - name: http
       port: {{ .Values.service.servicePort }}
   selector:
-    app: "{{  .Chart.Name }}-selector"
+    {{- include "kudoo-api.selectorLabels" . | nindent 4 }}

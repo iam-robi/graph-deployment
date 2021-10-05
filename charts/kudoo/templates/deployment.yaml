@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "{{  .Chart.Name }}-deployment"
+  name: {{ include "kudoo-api.fullname" . }}
   labels:
-    chart: '{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}'
+    {{- include "kudoo-api.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
@@ -13,8 +13,7 @@ spec:
       maxSurge: 1
   selector:
     matchLabels:
-      app: "{{  .Chart.Name }}-selector"
-      version: "current"
+      {{- include "kudoo-api.selectorLabels" . | nindent 6 }}
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   template:
     metadata:
