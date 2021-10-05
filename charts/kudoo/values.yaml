@@ -37,10 +37,10 @@ postgres:
   replicaHost: ""
   user: ""
   password:
-#    value: ""
-    fromSecret:
-      name:
-      key:
+    value: ""
+#    fromSecret:
+#      name:
+#      key:
 
 
 ingress:
