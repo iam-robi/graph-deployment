@@ -28,7 +28,9 @@ spec:
           - path: /
             pathType: Prefix
             backend:
-              serviceName: {{ include "kudoo-api.fullname" $ }}
-              servicePort: http
+              service:
+                name: {{ include "kudoo-api.fullname" $ }}
+                port:
+                  name: http
     {{- end }}
   {{- end }}
