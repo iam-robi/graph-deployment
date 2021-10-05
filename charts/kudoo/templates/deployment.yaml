@@ -34,7 +34,7 @@ spec:
               memory: "{{ .Values.image.resources.requests.memory }}"
           env:
             - name: TYPEORM_PASSWORD
-              value:  "{{ .Values.postgres.password }}"
+              value:  "{{ .Values.postgres.password.value }}"
             - name: TYPEORM_DATABASE
               value : "{{ .Values.postgres.db }}"
             - name: TYPEORM_HOST
