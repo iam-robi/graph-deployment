@@ -31,5 +31,17 @@ service:
   type: NodePort
   servicePort: 3000
 
+postgres:
+  db: ""
+  host: ""
+  replicaHost: ""
+  user: ""
+  password:
+#    value: ""
+    fromSecret:
+      name:
+      key:
+
+
 ingress:
   enabled: false
