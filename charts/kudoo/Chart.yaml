@@ -1,0 +1,4 @@
+apiVersion: v1
+description: A Helm chart for Kubernetes to deploy kudoo api
+name: kudoo-api
+version: 1.0.0

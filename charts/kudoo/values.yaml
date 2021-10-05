@@ -1,0 +1,32 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+revisionHistoryLimit: 1
+image:
+  repository: iam0robi/kudoo-api
+  tag: 73cdb6e
+  pullPolicy: IfNotPresent
+#  resources:
+#    requests:
+#      cpu: 200m
+#      memory: 300Mi
+  readinessProbe: {}
+  # Example (replace readinessProbe: {} with the following):
+  # readinessProbe:
+  #   httpGet:
+  #     path: /ready
+  #     port: 3000
+  #   initialDelaySeconds: 3
+  #   periodSeconds: 5
+  livenessProbe: {}
+  # Example (replace livenessProbe: {} with the following)::
+  # livenessProbe:
+  #   httpGet:
+  #     path: /live
+  #     port: 3000
+  #   initialDelaySeconds: 40
+  #   periodSeconds: 10
+service:
+  name: Node
+  type: NodePort
+  servicePort: 3000

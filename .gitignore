@@ -3,3 +3,4 @@ terraform/*/terraform.tfvars
 terraform/*/.terraform*
 terraform/*/terraform.tfstate*
 terraform/azure/private_ssh_key
+.idea/
