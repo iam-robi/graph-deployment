@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        { { - include "kudoo-api.selectorLabels" . | nindent 8 } }
+        {{ - include "kudoo-api.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: "{{  .Chart.Name  }}"
